@@ -1,3 +1,3 @@
 # JavaCamp
-Java Inheritance Practice
+Day 3 Inheritance Practice
 
