@@ -1,0 +1,3 @@
+# JavaCamp
+Java Inheritance Practice
+
