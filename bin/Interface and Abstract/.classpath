@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<classpath>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry kind="src" path="src"/>
-	<classpathentry kind="lib" path="easywsdl/ExKsoap2-1.0.3.1.jar"/>
-	<classpathentry kind="lib" path="easywsdl/ksoap2-android-assembly-3.6.4-jar-with-dependencies.jar"/>
-	<classpathentry kind="output" path="bin"/>
-</classpath>
