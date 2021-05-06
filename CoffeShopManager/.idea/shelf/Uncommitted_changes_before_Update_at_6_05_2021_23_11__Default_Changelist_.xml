@@ -1,0 +1,54 @@
+<changelist name="Uncommitted_changes_before_Update_at_6_05_2021_23_11_[Default_Changelist]" date="1620331910959" recycled="false" toDelete="true">
+  <option name="PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_6_05_2021_23_11_[Default_Changelist]/shelved.patch" />
+  <option name="DESCRIPTION" value="Uncommitted changes before Update at 6.05.2021 23:11 [Default Changelist]" />
+  <binary>
+    <option name="BEFORE_PATH" value="../CoffeShopInterfaceAndAbstractWithMernis/out/production/CoffeShopInterfaceAndAbstractWithMernis/Main.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../CoffeShopInterfaceAndAbstractWithMernis/out/production/CoffeShopInterfaceAndAbstractWithMernis/Concrete/StarbucksCustomerManager.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../CoffeShopInterfaceAndAbstractWithMernis/out/production/CoffeShopInterfaceAndAbstractWithMernis/Entities/Customer.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../CoffeShopInterfaceAndAbstractWithMernis/out/production/CoffeShopInterfaceAndAbstractWithMernis/Concrete/CustomerCheckManager.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../CoffeShopInterfaceAndAbstractWithMernis/out/production/CoffeShopInterfaceAndAbstractWithMernis/MernisService/PBBKPSPublicSoap$PBBIWcfMethod.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../CoffeShopInterfaceAndAbstractWithMernis/out/production/CoffeShopInterfaceAndAbstractWithMernis/Abstract/CustomerCheckService.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../CoffeShopInterfaceAndAbstractWithMernis/out/production/CoffeShopInterfaceAndAbstractWithMernis/Abstract/BaseCustomerManager.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../CoffeShopInterfaceAndAbstractWithMernis/out/production/CoffeShopInterfaceAndAbstractWithMernis/Concrete/NeroCustomerManager.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../CoffeShopInterfaceAndAbstractWithMernis/out/production/CoffeShopInterfaceAndAbstractWithMernis/Abstract/CustomerService.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../CoffeShopInterfaceAndAbstractWithMernis/out/production/CoffeShopInterfaceAndAbstractWithMernis/MernisService/PBBKPSPublicSoap12$PBBIWcfMethod.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
+  </binary>
+</changelist>
