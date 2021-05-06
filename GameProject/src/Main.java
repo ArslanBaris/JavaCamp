@@ -11,8 +11,8 @@ public class Main {
 
     public static void main(String[] args) {
 
-        User user1 = new User(1,"Barış","Arslan","15929842280",new Date(2000,01,01));
-        User user2 = new User(2,"Şadiye","Arslan","15932842116",new Date(1968,01,01));
+        User user1 = new User(1,"Barış","Arslan","123456789",new Date(2000,01,01));
+        User user2 = new User(2,"Mehmet","Arslan","123456789",new Date(1968,01,01));
 
         UserManager userManager = new UserManager(new MernicServiceAdapter());
         userManager.add(user1);
