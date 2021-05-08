@@ -31,13 +31,13 @@ public class UserManager implements UserService {
 
 
         }else{
-            System.out.println("Kullanıcı bilgilerini konrol et.");
+            System.out.println("Kullanici bilgilerini konrol et.");
         }
     }
     public boolean isExists(String email){
         for (User user:userDao.getAllUser()){
             if(email.equals(user.geteMail())){
-                System.out.println("Kullanıcı maili kullanımda.");
+                System.out.println("Kullanici maili kullanimda.");
                 return false;
             }
         }

@@ -17,7 +17,7 @@ public class HibernateUserDao implements UserDao {
     public String add(User user) {
         users.add(user);
         return "User added."+user.getFirstName()+" "+user.getLastName()+
-                "\n"+user.geteMail()+" adresinize mail gönderildi. Dogrumala kodunuz 1213";
+                "\n"+user.geteMail()+" adresinize mail gönderildi.";
     }
 
    @Override
@@ -26,7 +26,7 @@ public class HibernateUserDao implements UserDao {
             if(id == user.getId()){
                 return  user;
             }else
-                System.out.println("Eşleşme sağlanmadı.");
+                System.out.println("Eslesme saslanmadi.");
 
         }
         return  null;
