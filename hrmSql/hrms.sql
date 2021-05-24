@@ -5,6 +5,7 @@ CREATE TABLE public.users
     id SERIAL NOT NULL PRIMARY KEY,
     email varchar(50) NOT NULL,
     password varchar(50) NOT NULL,
+    insert_date date NOT NULL DEFAULT CURRENT_DATE,
     unique(email)
 );
 
@@ -41,26 +42,11 @@ CREATE TABLE public.employees
 CREATE TABLE public.activation_codes
 (
     id SERIAL NOT NULL PRIMARY KEY,
+    user_id int NOT NULL, 
     activation_code text NOT NULL,
     is_confirmed boolean NOT NULL,
-    confirm_date date
-);
-
-
-CREATE TABLE public.activation_code_candidates
-(
-    id INT NOT NULL PRIMARY KEY,
-    candidate_id INT NOT NULL,
-    FOREIGN KEY(candidate_id) REFERENCES public.candidates(candidatesid),
-    FOREIGN KEY(id) REFERENCES public.activation_codes(id)
-);
-
-CREATE TABLE public.activation_code_employers
-(
-    id INT NOT NULL PRIMARY KEY,
-    employer_id integer NOT NULL,
-    FOREIGN KEY(employer_id) REFERENCES public.employers(employersid),
-    FOREIGN KEY(id) REFERENCES public.activation_codes(id)
+    confirm_date date NOT NULL DEFAULT CURRENT_DATE,
+    FOREIGN KEY(user_id) REFERENCES public.users(id) NOT VALID
 );
 
 CREATE TABLE public.employers_activation_by_employees
@@ -69,7 +55,7 @@ CREATE TABLE public.employers_activation_by_employees
     employers_id INT NOT NULL,
     employees_id INT NOT NULL,
     is_confirmed boolean NOT NULL,
-    confirmed_date date NOT NULL,
+    confirmed_date date NOT NULL DEFAULT CURRENT_DATE,
     FOREIGN KEY(employers_id) REFERENCES public.employers(employersid),
     FOREIGN KEY(employees_id) REFERENCES public.employees(employeesid)
 );
