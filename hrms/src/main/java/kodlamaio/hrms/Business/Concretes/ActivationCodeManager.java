@@ -7,49 +7,44 @@ import kodlamaio.hrms.Business.Abstract.ActivationCodeService;
 import kodlamaio.hrms.Core.Utilities.Results.Result;
 import kodlamaio.hrms.Core.Utilities.Results.SuccessResult;
 import kodlamaio.hrms.DataAccess.Abstract.ActivationCodeDao;
-import kodlamaio.hrms.DataAccess.Abstract.UserDao;
 import kodlamaio.hrms.Entities.Concretes.ActivationCode;
-import kodlamaio.hrms.Entities.Concretes.Users;
+
 
 @Service
 public class ActivationCodeManager implements ActivationCodeService{
 	
-	private UserDao userDao;
 	private ActivationCodeDao activationCodeDao;
 	
 	@Autowired
-    public ActivationCodeManager(ActivationCodeDao activationCodeDao,UserDao userDao) {
+    public ActivationCodeManager(ActivationCodeDao activationCodeDao) {
         this.activationCodeDao = activationCodeDao;
-        this.userDao=userDao;
 	}
+	
 
 	@Override
-	public ActivationCode getByCode(String code) {
-		return this.activationCodeDao.findByActivationCode(code);
+	public Result add(ActivationCode code) {
+		this.activationCodeDao.save(code);
+		return new SuccessResult("Kod kayıt edildi!");
+	}
+
+
+	@Override
+	public boolean sendActivationCode(String emailAddress) {
+	
+		    String code= createActivationCode();
+			System.out.println(emailAddress +"Verification code sent to address . Verification code:" + code );
+			return true;
 	}
 	
 	String code = "";
-	@Override
-	public String createActivationCode(Users user) {
+	public String createActivationCode() {
 		int randomCode = (int) (Math.random()*9999);
 		code = String.valueOf(randomCode);
-		
-		ActivationCode activationCode=new ActivationCode();
-        activationCode.setUserId(user.getId());
-        activationCode.setActivationCode(code);
-        activationCodeDao.save(activationCode);
-
 		return code;
 	}
-	
-	
 
-	@Override
-	public Result activateUser(String code) {
-		 Users users = userDao.getOne(activationCodeDao.findByActivationCode(code).getUserId());
-	        userDao.save(users);
-	        return new SuccessResult("Kullanıcı aktif edildi");
-	}
+	
+	
 	
 	
 }

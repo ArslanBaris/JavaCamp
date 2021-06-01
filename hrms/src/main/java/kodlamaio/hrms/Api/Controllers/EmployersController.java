@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import kodlamaio.hrms.Business.Abstract.EmployersService;
 import kodlamaio.hrms.Business.Abstract.UserService;
 import kodlamaio.hrms.Core.Utilities.Results.DataResult;
 import kodlamaio.hrms.Core.Utilities.Results.Result;
@@ -20,22 +21,22 @@ import kodlamaio.hrms.Entities.Concretes.Users;
 @RequestMapping("/api/employers")
 public class EmployersController {
 	
-	private UserService userService;
+	private EmployersService employersService;
     
 	@Autowired
-	public EmployersController(UserService userService) {
+	public EmployersController(EmployersService employersService) {
 		super();
-		this.userService = userService;
+		this.employersService = employersService;
 	}
 	
 	@GetMapping("/getall")
-	public DataResult<List<Users>> getAll(){
-		return this.userService.getAll();
+	public DataResult<List<Employers>> getAll(){
+		return this.employersService.getAll();
 	}
 	
 	@PostMapping("/add")
     public Result add(@RequestBody Employers employers ) {
-    	return this.userService.addUsers(employers);
+    	return this.employersService.addEmployer(employers);
     }
 	
 	
