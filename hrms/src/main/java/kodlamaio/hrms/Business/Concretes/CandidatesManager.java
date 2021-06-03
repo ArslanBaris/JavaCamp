@@ -2,6 +2,7 @@ package kodlamaio.hrms.Business.Concretes;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kodlamaio.hrms.Business.Abstract.CandidatesService;
@@ -18,6 +19,7 @@ public class CandidatesManager implements CandidatesService {
 
 	private CandidatesDao candidatesDao;
 	
+	@Autowired
 	public CandidatesManager(CandidatesDao candidatesDao) {
 		this.candidatesDao=candidatesDao;
 	}
@@ -36,7 +38,7 @@ public class CandidatesManager implements CandidatesService {
 	@Override
 	public Result isNationalityIdExist(String nationalityId) {
 
-		if (candidatesDao.findByNationalIdentityContaining(nationalityId).isEmpty()) {
+		if (candidatesDao.findByNationalIdentity(nationalityId).isEmpty()) {
 			return new SuccessResult();
 
 		} else {
@@ -46,7 +48,7 @@ public class CandidatesManager implements CandidatesService {
 
 	@Override
 	public Result isCandidatesEmailExist(String mail) {
-		if (candidatesDao.findByEmailContaining(mail).isEmpty()) {
+		if (candidatesDao.findByEmail(mail).isEmpty()) {
 			return new SuccessResult();
 
 		} else {

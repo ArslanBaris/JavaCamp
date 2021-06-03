@@ -2,6 +2,7 @@ package kodlamaio.hrms.Business.Concretes;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kodlamaio.hrms.Business.Abstract.EmployersService;
@@ -16,6 +17,7 @@ public class EmployersManager implements EmployersService {
 	
 	private EmployersDao employersDao;
 	
+	@Autowired
 	public EmployersManager(EmployersDao employersDao) {
 		this.employersDao=employersDao;
 	}

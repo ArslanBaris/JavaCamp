@@ -36,8 +36,8 @@ public class Users {
 	@Column(name="password")
 	private String password;
 	
-	@Column(name="insert_date",
-			columnDefinition = "Date default CURRENT_DATE")
+	@Column(name="insert_date")
+			//columnDefinition = "Date default CURRENT_DATE")
 	private Date insertDate;
 	
 }

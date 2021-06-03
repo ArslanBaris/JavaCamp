@@ -15,6 +15,7 @@ import kodlamaio.hrms.Entities.Concretes.Employers;
 @RequestMapping("/api/auth")
 public class AuthController {
 
+
 	private AuthService authService;
 
 	@Autowired
@@ -30,7 +31,7 @@ public class AuthController {
 	
 
 	@PostMapping("/registerCandidate")
-	public Result registerJobSeeker(@RequestBody Candidates candidate ,String confirmPassword) {
+	public Result registerCandidate(@RequestBody Candidates candidate ,String confirmPassword) {
 		return this.authService.registerCandidate (candidate, confirmPassword);
 	}
 }

@@ -1,5 +1,8 @@
 package kodlamaio.hrms.Business.Concretes;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
+
 import org.springframework.stereotype.Service;
 
 import kodlamaio.hrms.Business.Abstract.ActivationCodeService;
@@ -7,8 +10,7 @@ import kodlamaio.hrms.Business.Abstract.AuthService;
 import kodlamaio.hrms.Business.Abstract.CandidatesService;
 import kodlamaio.hrms.Business.Abstract.EmployersService;
 import kodlamaio.hrms.Business.Abstract.UserService;
-import kodlamaio.hrms.Core.Utilities.Adapter.MernisAdapterService;
-import kodlamaio.hrms.Core.Utilities.Bussiness.BusinessRules;
+import kodlamaio.hrms.Core.Utilities.Adapter.MernisServiceAdapter;
 import kodlamaio.hrms.Core.Utilities.Results.ErrorResult;
 import kodlamaio.hrms.Core.Utilities.Results.Result;
 import kodlamaio.hrms.Core.Utilities.Results.SuccessDataResult;
@@ -27,16 +29,19 @@ public class AuthManager implements AuthService {
 	private UserService userService;
 	private CandidatesService candidateService;
 	private ActivationCodeService activationCodeService;
-	private MernisAdapterService mernisCheckService;;
+	private MernisServiceAdapter mernisService;
+	
 
+	@Autowired
 	public AuthManager(UserService userService, EmployersService employerService, CandidatesService candidateService,
-			ActivationCodeService activationCodeService) {
+			ActivationCodeService activationCodeService, MernisServiceAdapter mernisService) {
 		super();
 		this.userService = userService;
 		this.employerService = employerService;
 		this.candidateService = candidateService;
 		this.activationCodeService = activationCodeService;
-		this.mernisCheckService = mernisCheckService;
+		this.mernisService =mernisService;
+		
 	}
 
 	@Override
@@ -49,7 +54,7 @@ public class AuthManager implements AuthService {
 			return new ErrorResult("This mail is registered in the system.Please enter a different email address.");
 		}
 
-		else if (employer.getPassword() != confirmPassword) {
+		else if (!employer.getPassword().equals( confirmPassword)) {
 			System.out.println(employer.getPassword());
 			System.out.println(confirmPassword);
 
@@ -77,23 +82,41 @@ public class AuthManager implements AuthService {
 
 	@Override
 	public Result registerCandidate(Candidates candidate, String confirmPassword) {
-		Result result = BusinessRules.run(
-				fakeMernisControl(candidate.getNationalIdentity(), candidate.getFirstName(), 
-						candidate.getLastName(),
-						candidate.getDateOfBirth()),
-				isNationaltyIdExist(candidate.getNationalIdentity()), 
-				//this.userService.getUsersByEmail(candidate.getEmail())
-				isCandidateMailExist(candidate.getEmail()));
-		
-		if (result != null) {
-			return result;
+	
+		if (!isValidEmail(candidate.getEmail())) {
+			return new ErrorResult("Invalid email address. Please enter your email address correctly.");
+		}
+
+		else if (!cheackIfEmailExist(candidate.getEmail())) {
+			return new ErrorResult("This mail is registered in the system.Please enter a different email address.");
 		}
 		
-		this.candidateService.add(candidate);
-		//String code = activationCodeService.sendActivationCode(candidate.getEmail());
-		//verificationCodeForEmployees(code, 0, employee.getMail(), employee.getId());
+		else if (!isNationaltyIdExist(candidate.getNationalIdentity())) {
+			return new ErrorResult("This NationaltyId is registered in the system.Please enter a different email address.");
+		}
 
-		return new SuccessResult("Kayıt başarıyla tamamlandı.");
+		else if (!candidate.getPassword().equals( confirmPassword)) {
+			System.out.println(candidate.getPassword());
+			System.out.println(confirmPassword);
+
+			return new ErrorResult("Password does not match. Please re-enter your password.");
+		}
+		
+		else if( !mernisService.checkVirtualPerson(
+				candidate.getNationalIdentity(), 
+				candidate.getFirstName().toUpperCase(),
+				candidate.getLastName().toUpperCase(),
+				candidate.getDateOfBirth())) {
+			return new ErrorResult("Not a valid person.");
+		}
+		
+
+		this.activationCodeService.sendActivationCode(candidate.getEmail());
+		
+		this.candidateService.add(candidate);
+		
+		return new SuccessResult("Valid person, Candidate Registered.");
+
 	}
 
 	public boolean isValidEmail(String email) {
@@ -104,22 +127,14 @@ public class AuthManager implements AuthService {
 			return false;
 		return pat.matcher(email).matches();
 	}
-
-	private Result fakeMernisControl(String nationalityId, String firstName, String lastName, Date birthday) {
-
-		if (this.mernisCheckService.checkVirtualPerson(nationalityId, firstName, lastName, birthday).isSuccess()) {
-			return new SuccessResult();
-		}
-		return new ErrorResult("Doğrulama başarısız.");
-	}
 	
-    private Result isNationaltyIdExist(String nationalityId) {
-		if (this.candidateService.isNationalityIdExist(nationalityId).isSuccess()) {
+    private boolean isNationaltyIdExist(String nationalityId) {
+		if (this.candidateService.isNationalityIdExist(nationalityId).isSuccess()) 
+			return true;
 			
-			return new SuccessResult();
-			}
-			return new ErrorResult("Bu Tc kimlik no ile kayıtlı kullanıcı var.");
+		return false;
 		}
+    
     private Result isCandidateMailExist(String mail) {
 
 		if (this.candidateService.isCandidatesEmailExist(mail).isSuccess()) {
