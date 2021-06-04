@@ -34,6 +34,8 @@ public class ActivationCode {
 	@Column(name = "is_confirmed")
 	private boolean isConfirmed;
 	
-	@Column(name = "confirm_date")
+	
+	@Column(name = "confirm_date",columnDefinition = "Date Default CURRENT_DATE")
+	
 	private Date confirmDate;
 }
