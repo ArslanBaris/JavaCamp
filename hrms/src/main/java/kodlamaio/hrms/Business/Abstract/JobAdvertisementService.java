@@ -14,13 +14,15 @@ public interface JobAdvertisementService {
 	
 	Result delete(int id);
 	
-	Result changeOpentoClose(int id);
+	Result changeToActive(int id);
+	
+	DataResult<JobAdvertisements>getById(int id);
 
 	DataResult<List<JobAdvertisements>> getAll();
 	
 	DataResult<List<JobAdvertisements>> getByIsActive();
 	
-	DataResult<List<JobAdvertisements>> getByIsActiveTrueOrderByJobListDateDesc();
+	DataResult<List<JobAdvertisements>> getByIsActiveTrueOrderByApplicationDeadlineDesc();
 	
 	DataResult<List<JobAdvertisements>> getByIsActiveTrueAndEmployerId(int id);
 	
