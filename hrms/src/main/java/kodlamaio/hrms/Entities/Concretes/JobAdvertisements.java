@@ -1,5 +1,8 @@
 package kodlamaio.hrms.Entities.Concretes;
 
+
+
+
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -22,7 +25,7 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 @Data
-
+@Entity
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "job_advertisements")
@@ -57,17 +60,17 @@ public class JobAdvertisements {
 	@Column(name = "job_list_date")
 	private Date jobListDate;
 	//(targetEntity = Employers.class,fetch = FetchType.LAZY,optional = false)
-	@ManyToOne
+	@ManyToOne(targetEntity = Employers.class,fetch = FetchType.LAZY,optional = false)
 	@JoinColumn(name = "employer_id")
 	private Employers employer;
 	
 	
-	@ManyToOne
+	@ManyToOne(targetEntity = City.class,fetch = FetchType.LAZY,optional = false)
 	@JoinColumn(name = "city_id")
 	private City city;
 	
 	
-	@ManyToOne
+	@ManyToOne(targetEntity = JobPosition.class,fetch = FetchType.LAZY,optional = false)
 	@JoinColumn(name = "job_title_id")
 	private JobPosition jobPosition;
 	
