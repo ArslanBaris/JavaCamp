@@ -5,9 +5,8 @@ import kodlamaio.hrms.Entities.Concretes.ActivationCode;
 
 
 public interface ActivationCodeService {
+	
 	Result add(ActivationCode activationCode);
-	boolean sendActivationCode(String emailAddress);
+	Result sendActivationCode(ActivationCode activationCode,String emailAddress);
 
-	
-	
 }
