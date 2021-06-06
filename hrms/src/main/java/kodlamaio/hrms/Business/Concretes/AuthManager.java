@@ -16,9 +16,11 @@ import kodlamaio.hrms.Core.Utilities.Results.Result;
 import kodlamaio.hrms.Core.Utilities.Results.SuccessDataResult;
 import kodlamaio.hrms.Core.Utilities.Results.SuccessResult;
 import kodlamaio.hrms.DataAccess.Abstract.CandidatesDao;
+import kodlamaio.hrms.Entities.Concretes.ActivationCode;
 import kodlamaio.hrms.Entities.Concretes.Candidates;
 import kodlamaio.hrms.Entities.Concretes.Employers;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.regex.Pattern;
 
@@ -46,6 +48,7 @@ public class AuthManager implements AuthService {
 
 	@Override
 	public Result registerEmployer(Employers employer, String confirmPassword) {
+
 		if (!isValidEmail(employer.getEmail())) {
 			return new ErrorResult("Invalid email address. Please enter your email address correctly.");
 		}
@@ -64,9 +67,9 @@ public class AuthManager implements AuthService {
 		var result = this.employerService.addEmployer(employer);
 
 		if (result.isSuccess()) {
-			if (this.activationCodeService.sendActivationCode(employer.getEmail())) {
+			//if (this.activationCodeService.sendActivationCode(employer.getEmail())) {
 				return new SuccessResult("Employer Registered.");
-			}
+			//}
 		}
 
 		return new ErrorResult();
@@ -110,12 +113,17 @@ public class AuthManager implements AuthService {
 			return new ErrorResult("Not a valid person.");
 		}
 		
+		ActivationCode activationCode = new ActivationCode();
+		activationCode.setActivationCode(createActivationCode());
+		activationCode.setUserId(candidate.getId());
+		activationCode.setConfirmed(false);
 
-		this.activationCodeService.sendActivationCode(candidate.getEmail());
+		this.activationCodeService.add(activationCode);
+		return this.activationCodeService.sendActivationCode(activationCode,candidate.getEmail());
 		
-		this.candidateService.add(candidate);
+		//this.candidateService.add(candidate);
 		
-		return new SuccessResult("Valid person, Candidate Registered.");
+		//return new SuccessResult("Valid person, Candidate Registered.");
 
 	}
 
@@ -144,6 +152,13 @@ public class AuthManager implements AuthService {
 			return new ErrorResult("Bu mail ile kayıtlı kullanıcı var.");
 		}
 
+	}
+    
+   
+	public String createActivationCode() {
+		int randomCode = (int) (Math.random()*9999);
+		String code = String.valueOf(randomCode);
+		return code;
 	}
     
 
