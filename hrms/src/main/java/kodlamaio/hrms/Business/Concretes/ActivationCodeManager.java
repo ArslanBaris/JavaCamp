@@ -29,19 +29,14 @@ public class ActivationCodeManager implements ActivationCodeService{
 
 
 	@Override
-	public boolean sendActivationCode(String emailAddress) {
+	public Result sendActivationCode(ActivationCode activationCode,String emailAddress) {
 	
-		    String code= createActivationCode();
-			System.out.println(emailAddress +"Verification code sent to address . Verification code:" + code );
-			return true;
+		    String code= activationCode.getActivationCode();
+			String message=emailAddress +"Verification code sent to address . Verification code:" + code ;
+			return new Result(true, message);
 	}
 	
-	String code = "";
-	public String createActivationCode() {
-		int randomCode = (int) (Math.random()*9999);
-		code = String.valueOf(randomCode);
-		return code;
-	}
+	
 
 	
 	
