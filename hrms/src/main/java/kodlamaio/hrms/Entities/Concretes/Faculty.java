@@ -8,50 +8,51 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
-
 import lombok.NoArgsConstructor;
 
 @Data
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "city")
-@JsonIgnoreProperties({"hibernateLazyInitializer","handler","job_adversitements"})
+@Table(name = "faculties")
+@JsonIgnoreProperties({"hibernateLazyInitializer","handler","CandidateSchool"})
+public class Faculty {
 
-public class City {
-
-	@Id	
-	@GeneratedValue(strategy=GenerationType.IDENTITY) //AutoIncrement 
-	@Column(name = "id")
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name= "id")
 	private int id;
 	
+	@Column(name = "name")
+	@NotNull
+	@NotBlank
+	private String name;
 	
-	@Column(name = "city_name")
-	private String cityName;
+	@ManyToOne()
+	@JsonIgnore()
+	@JoinColumn(name = "university_id")
+	private University university;
 	
 	@JsonIgnore
-	@OneToMany(mappedBy = "city")
-	private List<University> universities;
+	@OneToMany(mappedBy = "faculty")
+	private List<CandidateSchool> candidateSchools;
 	
 	@JsonIgnore
-	@OneToMany(mappedBy = "city")
-	private List<JobAdvertisements> advertisements;
-
-	public City( String cityName, List<JobAdvertisements> advertisements) {
-		super();
-		this.cityName = cityName;
-		this.advertisements = advertisements;
-	}
+	@OneToMany(mappedBy = "faculty")
+	private List<Department> departments;
+	
 	
 	
 }

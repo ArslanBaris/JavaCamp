@@ -36,6 +36,11 @@ public class JobPosition {
 	@JsonIgnore
 	@OneToMany(mappedBy = "jobPosition")
 	private List<JobAdvertisements> jobAdvertisements;
+	
+	@JsonIgnore
+	@OneToMany(mappedBy = "position")
+	private List<CandidateExperiences> candidateExperiences;
+
 
 	public JobPosition( String title, List<JobAdvertisements> jobAdvertisements) {
 		super();

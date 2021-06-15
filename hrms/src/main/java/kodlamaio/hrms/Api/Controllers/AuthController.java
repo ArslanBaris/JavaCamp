@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import kodlamaio.hrms.Business.Abstract.AuthService;
 import kodlamaio.hrms.Core.Utilities.Results.Result;
+import kodlamaio.hrms.Entities.Concretes.ActivationCode;
 import kodlamaio.hrms.Entities.Concretes.Candidates;
 import kodlamaio.hrms.Entities.Concretes.Employers;
 
@@ -34,4 +35,6 @@ public class AuthController {
 	public Result registerCandidate(@RequestBody Candidates candidate ,String confirmPassword) {
 		return this.authService.registerCandidate (candidate, confirmPassword);
 	}
+	
+	
 }

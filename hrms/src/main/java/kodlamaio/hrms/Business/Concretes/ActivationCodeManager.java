@@ -24,6 +24,7 @@ public class ActivationCodeManager implements ActivationCodeService{
 	@Override
 	public Result add(ActivationCode code) {
 		this.activationCodeDao.save(code);
+		System.out.println("kod eklendi");
 		return new SuccessResult("Kod kayıt edildi!");
 	}
 
@@ -33,6 +34,7 @@ public class ActivationCodeManager implements ActivationCodeService{
 	
 		    String code= activationCode.getActivationCode();
 			String message=emailAddress +"Verification code sent to address . Verification code:" + code ;
+			System.out.println("kod gönderildi");
 			return new Result(true, message);
 	}
 	

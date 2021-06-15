@@ -60,17 +60,17 @@ public class JobAdvertisements {
 	@Column(name = "job_list_date")
 	private Date jobListDate;
 	//(targetEntity = Employers.class,fetch = FetchType.LAZY,optional = false)
-	@ManyToOne(targetEntity = Employers.class,fetch = FetchType.LAZY,optional = false)
+	@ManyToOne()
 	@JoinColumn(name = "employer_id")
 	private Employers employer;
 	
-	
-	@ManyToOne(targetEntity = City.class,fetch = FetchType.LAZY,optional = false)
+	//targetEntity = City.class,fetch = FetchType.LAZY,optional = false
+	@ManyToOne()
 	@JoinColumn(name = "city_id")
 	private City city;
 	
 	
-	@ManyToOne(targetEntity = JobPosition.class,fetch = FetchType.LAZY,optional = false)
+	@ManyToOne()
 	@JoinColumn(name = "job_title_id")
 	private JobPosition jobPosition;
 	

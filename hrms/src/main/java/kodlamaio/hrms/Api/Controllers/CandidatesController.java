@@ -11,11 +11,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import kodlamaio.hrms.Business.Abstract.CandidatesService;
-import kodlamaio.hrms.Business.Abstract.UserService;
+
 import kodlamaio.hrms.Core.Utilities.Results.DataResult;
 import kodlamaio.hrms.Core.Utilities.Results.Result;
 import kodlamaio.hrms.Entities.Concretes.Candidates;
-import kodlamaio.hrms.Entities.Concretes.Users;
+
 
 
 @RestController
