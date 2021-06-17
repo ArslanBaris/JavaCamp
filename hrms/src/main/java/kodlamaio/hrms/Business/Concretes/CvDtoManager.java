@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kodlamaio.hrms.Business.Abstract.CandidateExperiencesService;
+import kodlamaio.hrms.Business.Abstract.CandidateImageService;
 import kodlamaio.hrms.Business.Abstract.CandidateLanguageService;
 import kodlamaio.hrms.Business.Abstract.CandidateLinksService;
 import kodlamaio.hrms.Business.Abstract.CandidateSchoolService;
@@ -13,9 +14,10 @@ import kodlamaio.hrms.Core.Utilities.Results.DataResult;
 import kodlamaio.hrms.Core.Utilities.Results.Result;
 import kodlamaio.hrms.Core.Utilities.Results.SuccessDataResult;
 import kodlamaio.hrms.Core.Utilities.Results.SuccessResult;
-import kodlamaio.hrms.DataAccess.CandidateLinksDao;
 import kodlamaio.hrms.DataAccess.Abstract.CandidateExperiencesDao;
+import kodlamaio.hrms.DataAccess.Abstract.CandidateImageDao;
 import kodlamaio.hrms.DataAccess.Abstract.CandidateLanguageDao;
+import kodlamaio.hrms.DataAccess.Abstract.CandidateLinksDao;
 import kodlamaio.hrms.DataAccess.Abstract.CandidateSchoolDao;
 import kodlamaio.hrms.DataAccess.Abstract.CandidateSkillsDao;
 import kodlamaio.hrms.DataAccess.Abstract.CandidatesDao;
@@ -36,6 +38,8 @@ public class CvDtoManager implements CvDtoService {
 	private CandidateLinksService candidateLinksService;
 	private CandidateExperiencesDao candidateExperiencesDao;
 	private CandidateExperiencesService candidateExperiencesService;
+	private CandidateImageService candidateImageService;
+	private CandidateImageDao candidateImageDao;
 	
 	
 	@Autowired
@@ -44,7 +48,8 @@ public class CvDtoManager implements CvDtoService {
 			CandidateLanguageDao candidateLanguageDao, CandidateSkillsDao candidateSkillsDao,
 			CandidateSkillsService candidateSkillsService,CandidateLinksDao candidateLinksDao,
 			CandidateLinksService candidateLinksService,CandidateExperiencesDao candidateExperiencesDao,
-			CandidateExperiencesService candidateExperiencesService) {
+			CandidateExperiencesService candidateExperiencesService,CandidateImageService candidateImageService,
+			CandidateImageDao candidateImageDao) {
 		super();
 		this.candidateDao = candidateDao;
 		this.candidateSchoolDao = candidateSchoolDao;
@@ -57,6 +62,8 @@ public class CvDtoManager implements CvDtoService {
 		this.candidateLinksService = candidateLinksService;
 		this.candidateExperiencesDao = candidateExperiencesDao;
 		this.candidateExperiencesService = candidateExperiencesService;
+		this.candidateImageDao = candidateImageDao;
+		this.candidateImageService = candidateImageService;
 	}
 
 	@Override
@@ -79,6 +86,10 @@ public class CvDtoManager implements CvDtoService {
         cvDto.getCandidateExperiences().forEach(candidateExperiences -> candidateExperiences.setCandidate(candidate));
         candidateExperiencesService.addAll(cvDto.getCandidateExperiences());
         
+        cvDto.getCandidateImages().forEach(candidateImage -> candidateImage.setCandidate(candidate));
+        candidateImageService.addAll(cvDto.getCandidateImages());
+        
+        
         return new SuccessResult("Okullar ve Diller Cv'ye eklendi.");
 	}
 
@@ -91,7 +102,7 @@ public class CvDtoManager implements CvDtoService {
 		cvDto.setCandidateSkills(this.candidateSkillsDao.getByCandidateId(candidateId));
 		cvDto.setCandidateLinks(this.candidateLinksDao.getByCandidateId(candidateId));
 		cvDto.setCandidateExperiences(this.candidateExperiencesDao.getAllByCandidateIdOrderByLeaveDateDesc(candidateId));
-		
+		cvDto.setCandidateImages(this.candidateImageDao.getByCandidateId(candidateId));
 	
 
 		return new SuccessDataResult<CvDto>(cvDto);

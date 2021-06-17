@@ -10,7 +10,7 @@ import kodlamaio.hrms.Core.Utilities.Results.DataResult;
 import kodlamaio.hrms.Core.Utilities.Results.Result;
 import kodlamaio.hrms.Core.Utilities.Results.SuccessDataResult;
 import kodlamaio.hrms.Core.Utilities.Results.SuccessResult;
-import kodlamaio.hrms.DataAccess.CandidateLinksDao;
+import kodlamaio.hrms.DataAccess.Abstract.CandidateLinksDao;
 import kodlamaio.hrms.Entities.Concretes.CandidateLinks;
 
 @Service

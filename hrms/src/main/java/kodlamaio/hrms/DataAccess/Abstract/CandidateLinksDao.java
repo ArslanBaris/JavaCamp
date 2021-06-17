@@ -1,4 +1,4 @@
-package kodlamaio.hrms.DataAccess;
+package kodlamaio.hrms.DataAccess.Abstract;
 
 import java.util.List;
 

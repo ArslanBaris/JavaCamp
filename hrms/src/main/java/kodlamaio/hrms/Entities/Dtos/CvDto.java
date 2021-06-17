@@ -7,6 +7,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import kodlamaio.hrms.Entities.Abstract.Dto;
 import kodlamaio.hrms.Entities.Concretes.CandidateExperiences;
+import kodlamaio.hrms.Entities.Concretes.CandidateImage;
 import kodlamaio.hrms.Entities.Concretes.CandidateLanguage;
 import kodlamaio.hrms.Entities.Concretes.CandidateLinks;
 import kodlamaio.hrms.Entities.Concretes.CandidateSchool;
@@ -29,4 +30,5 @@ public class CvDto implements Dto {
 	 private List<@Valid CandidateSkills> candidateSkills;
 	 private List<@Valid CandidateLinks> candidateLinks;
 	 private List<@Valid CandidateExperiences> candidateExperiences;
+	 private List<@Valid CandidateImage> candidateImages;
 }
